@@ -3,6 +3,7 @@ Como executar o projeto:
 Abra o docker desktop
 No visual studio abra o prompt de comando integrado na raiz do projeto
 Rode o comando: docker-compose up -d
+Depois que concluir os dowloads, navegue até a pasta 'API-node' e rode "node index.js" no terminal
 Depois que tudo estiver pronto, basta ir no navegador e acessar:
 
 http://localhost:8080 para ir na pagina principal
