@@ -1,0 +1,113 @@
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.login-container {
+    min-width: 440px;
+    margin: 0;
+    background-color: #222121;
+    border: 1px solid #8f8d8d;
+    padding: 1.25rem;
+    border-radius: 1rem;
+  }
+
+  .login-container:hover {
+    border: 1.5px solid #cca152;
+    transition: 2s linear;
+  }
+  
+  .login-container h2 {
+    text-align: center;
+    color: #e49b0f;
+  }
+  
+  .login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: .625rem;
+  }
+  
+  .login-container label {
+    font-weight: bold;
+    color: #e49b0f;
+  }
+  
+  .login-container input {
+    padding: 1rem;
+    border-radius: 1rem;
+    border: none;
+  }
+  
+  .login-container .link-cadastro {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .login-container .link-cadastro a {
+    color: #e49b0f;
+  }
+  
+  .login-container .link-cadastro a:hover {
+    filter: brightness(0.9);
+    transition: 0.5s;
+  }
+  
+  .login-container input[type="submit"] {
+    background-color: #e49b0f;
+    color: #000000;
+    padding: .625rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    font-size: large;
+    font-weight: bold;
+  }
+  
+  .login-container input[type="submit"]:hover {
+    filter: brightness(1.2);
+    transition: 0.5s;
+  }
+  
+  /* Estilos para mensagens */
+  .mensagem {
+    padding: .625rem;
+    margin: .625rem 0;
+    border-radius: 5px; 
+    text-align: center;
+  }
+  
+  .mensagem.erro {
+    background-color: #ff4444;
+    color: white;
+    border: 1px solid #cc0000;
+  }
+
+  .mensagem.erro ul {
+    list-style: none;
+  }
+  
+  .mensagem.sucesso {
+    background-color: #44ff44;
+    color: black;
+    border: 1px solid #00cc00;
+  }
+  
+  /* Estilos para botões de redirecionamento */
+  .btn-redirect {
+    display: inline-block;
+    background-color: #e49b0f;
+    color: black;
+    padding: .625rem 1.25rem;
+    text-decoration: none;
+    border-radius: 1rem;
+    font-weight: bold;
+    margin-top: .625rem;
+    transition: 0.3s;
+  }
+  
+  .btn-redirect:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+  }

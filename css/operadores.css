@@ -1,0 +1,60 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  .atacantes {
+    width: 50%;
+    padding: 1.25rem;
+    margin-right: .625rem;
+    margin-bottom: 1.25rem;
+    margin-top: .625rem;
+    background-color: #333;
+    border-radius: 2rem;
+    border-top: 4px solid #d62f09;
+  }
+  
+  .defensores {
+    width: 50%;
+    padding: 1.25rem;
+    margin-left: .625rem;
+    margin-top: .625rem;
+    margin-bottom: 1.25rem;
+    background-color: #333;
+    border-radius: 2rem;
+    border-top: 4px solid #0e9fcf;
+  }
+  
+  .atacantes h2 {
+    text-align: center;
+    padding-bottom: .625rem;
+    color: #d62f09;
+    filter: drop-shadow(5px 5px 5px #000000);
+  }
+  
+  .defensores h2 {
+    text-align: center;
+    padding-bottom: .625rem;
+    color: #0e9fcf;
+    filter: drop-shadow(5px 5px 5px #000000);
+  }
+  
+  .operador {
+    display: flex;
+    align-items: center;
+    gap: .625rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .operador img {
+    width: 55px;
+    height: 52px;
+    border-radius: 50%;
+  }
+  
+  .operador h3 {
+    color: #e49b0f;
+    font-size: 1rem;
+  }

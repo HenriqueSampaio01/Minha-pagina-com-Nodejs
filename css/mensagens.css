@@ -1,0 +1,115 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.25rem;
+}
+
+h2 {
+    color: #e49b0f;
+    margin-bottom: .625rem;
+    text-align: center;
+}
+
+.descricao {
+    text-align: center;
+    color: #fdfdfd;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+.form-mensagem {
+    padding: 30px;
+    border-radius: 1rem;
+    box-shadow: 0 2px .625rem rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #e49b0f;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.btn-enviar {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.btn-enviar:hover {
+    filter: brightness(0.8);
+}
+
+.btn-enviar:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+.mensagem-sucesso,
+.mensagem-erro {
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 1.25rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.mensagem-sucesso {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.mensagem-erro {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: .625rem;
+    }
+    
+    .form-mensagem {
+        padding: 1.25rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        font-size: 16px; /* Evita zoom no iOS */
+    }
+}

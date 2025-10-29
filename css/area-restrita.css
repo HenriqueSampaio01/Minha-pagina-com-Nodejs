@@ -1,0 +1,70 @@
+.menu-area-restrita {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.menu-area-restrita h2 {
+  font-size: 1.87rem;
+  margin-bottom: 1.25rem;
+  color: #e49b0f;
+}
+
+.menu-opcoes {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.menu-opcoes .btn {
+  background-color: #e49b0f;
+  color: #fff;  
+  padding: 1.25rem 1.87rem;
+  border-radius: 1rem;
+  font-weight: bold;
+  margin-top: 15px;
+  text-decoration: none;
+  transition: background-color 0.5s ease-in-out;
+  box-shadow: 0 4px 8px #000;
+}
+
+.menu-opcoes .btn:hover {
+  background-color: #cc860e;
+}
+
+.bem-vindo {
+  background: linear-gradient(135deg, #e49b0f 0%, #000000 100%);
+  color: white;
+  padding: 1.25rem;
+  border-radius: .625rem;
+  margin-bottom: 1.25rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bem-vindo h3 {
+  margin: 0 0 .625rem 0;
+  font-size: 1.5em;
+}
+
+.bem-vindo p {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.btn-logout {
+  background: #e49b0f;
+  color: #fff;
+  padding: 1.25rem 1.87rem;
+  border-radius: 1rem;
+  font-weight: bold;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+  box-shadow: 0 4px 8px #000;
+  border: none;
+}
+
+.btn-logout:hover {
+  background: #c0392b;
+}

@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # Servidor web Apache com PHP
+  web:
+    image: php:8.2-apache
+    container_name: minha-pagina-web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./html:/var/www/html
+      - ./css:/var/www/html/css
+      - ./js:/var/www/html/js
+      - ./imgs:/var/www/html/imgs
+      - ./php:/var/www/html/php
+    depends_on:
+      - db
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    command: >
+      sh -c "a2enmod rewrite &&
+              docker-php-ext-install pdo pdo_mysql &&
+              apache2-foreground"
+
+  # Banco de dados MySQL
+  db:
+    image: mysql:8.0
+    container_name: minha-pagina-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cadastro
+      MYSQL_USER: henriqueadmin
+      MYSQL_PASSWORD: henriqueadmin
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./banco.sql:/docker-entrypoint-initdb.d/banco.sql
+    command: --default-authentication-plugin=mysql_native_password
+
+  # phpMyAdmin para gerenciar o banco
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pagina-web-phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

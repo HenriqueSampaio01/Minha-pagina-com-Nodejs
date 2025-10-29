@@ -1,0 +1,54 @@
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mensagens - R6 Wiki</title>
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/mensagens.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Mensagens dos usuários</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="operadores.html">Operadores</a></li>
+          <li><a href="mapas.html">Mapas</a></li>
+          <li><a href="mensagens.html">Mensagens</a></li>
+          <li><a href="login.html">Faça seu Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container">
+        <h2>Deixe seu feedback do meu site:</h2>
+        <p class="descricao">Sua opinião é muito importante para melhorarmos o site!</p>
+        
+        <form id="formMensagem" class="form-mensagem">
+          <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required placeholder="Seu nome completo">
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email (opcional):</label>
+            <input type="email" id="email" name="email" placeholder="seu@email.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="mensagem">Mensagem:</label>
+            <textarea id="mensagem" name="mensagem" required placeholder="Digite aqui sua mensagem, sugestão, crítica ou elogio..."></textarea>
+          </div>
+          
+          <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+        </form>
+        
+        <div id="mensagemSucesso" class="mensagem-sucesso" style="display: none;"></div>
+        <div id="mensagemErro" class="mensagem-erro" style="display: none;"></div>
+      </div>
+    </main>
+
+    <script src="/js/mensagens.js"></script>
+  </body>
+</html>

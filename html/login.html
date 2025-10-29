@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - R6 Wiki</title>
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/login.css">
+  <script src="/js/ajax-login.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <h1>Faça seu Login</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="operadores.html">Operadores</a></li>
+        <li><a href="mapas.html">Mapas</a></li>
+        <li><a href="mensagens.html">Mensagens</a></li>
+        <li><a href="login.html">Faça seu Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="login-container">
+      <h2>Entrar</h2>
+      <form action="login.php" method="post">
+        <div id="mensagem-usuario" class="mensagem"></div>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" autocomplete="on" placeholder="Digite seu e-mail">
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" autocomplete="on" placeholder="Digite sua senha">
+
+        <input type="submit" value="Entrar">
+      </form>
+      <div class="link-cadastro">
+        <p>Não tem conta? <a href="cadastro.html">Registre-se</a></p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

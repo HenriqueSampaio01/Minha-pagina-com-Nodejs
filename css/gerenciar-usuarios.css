@@ -1,0 +1,40 @@
+body {
+    padding: 1.25rem;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 1.25rem;
+    color: #e49b0f;
+  }
+  
+  table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+    background-color: #1c1c1c;  
+  }
+  
+  th,
+  td {
+    padding: .75rem 1rem;
+    border: 1px solid #e49b0f;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #292929;
+    color: #e49b0f;
+    font-weight: bold;
+  }
+  
+  a.voltar {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #e49b0f;
+    text-decoration: none;
+  }
+  
+  a.voltar:hover {
+    text-decoration: underline;
+  }

@@ -1,0 +1,21 @@
+{
+  "name": "meuprojeto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js/index.js",
+  "scripts": {
+    "start": "node js/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "md5": "^2.3.0",
+    "multer": "^2.0.2",
+    "mysql2": "^3.11.3"
+  }
+}
