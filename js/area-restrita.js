@@ -7,21 +7,30 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function verificarSessao() {
-    fetch('/php/verifica-sessao.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.logado) {
-                // Usuário está logado, mostrar nome
-                mostrarBemVindo(data.usuario.nome);
-            } else {
-                // Usuário não está logado, redirecionar
-                window.location.href = data.redirect;
-            }
-        })
-        .catch(error => {
-            console.error('Erro ao verificar sessão:', error);
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = 'login.html';
+        return;
+    }
+    // Valida token chamando uma rota protegida
+    fetch('/cadastro', {
+        headers: { 'Authorization': 'Bearer ' + token }
+    })
+    .then(resp => {
+        if (resp.status === 401) {
+            localStorage.removeItem('token');
             window.location.href = 'login.html';
-        });
+            return null;
+        }
+        return resp.json();
+    })
+    .then(() => {
+        const nome = localStorage.getItem('nomeUsuario') || 'Usuário';
+        mostrarBemVindo(nome);
+    })
+    .catch(() => {
+        window.location.href = 'login.html';
+    });
 }
 
 function mostrarBemVindo(nome) {
@@ -31,18 +40,7 @@ function mostrarBemVindo(nome) {
 }
 
 function fazerLogout() {
-    fetch('/php/logout.php', {
-        method: 'POST'
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.sucesso) {
-            alert(data.mensagem);
-            window.location.href = data.redirect;
-        }
-    })
-    .catch(error => {
-        console.error('Erro ao fazer logout:', error);
-        alert('Erro ao fazer logout. Tente novamente.');
-    });
+    localStorage.removeItem('token');
+    localStorage.removeItem('nomeUsuario');
+    window.location.href = 'login.html';
 }

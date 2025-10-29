@@ -13,14 +13,18 @@ document.addEventListener('DOMContentLoaded', function() {
 // Carregar lista de usuários
 async function carregarUsuarios() {
     try {
-        const response = await fetch('/php/listar-usuarios.php');
+        const token = localStorage.getItem('token');
+        const response = await fetch('/cadastro', {
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
         const data = await response.json();
         
-        if (data.sucesso) {
-            usuarios = data.usuarios;
+        if (Array.isArray(data)) {
+            usuarios = data;
             renderizarTabela();
         } else {
-            alert('Erro ao carregar usuários: ' + data.erros.join(', '));
+            const msg = data.message || 'Erro ao carregar usuários';
+            alert('Erro ao carregar usuários: ' + msg);
         }
     } catch (error) {
         console.error('Erro:', error);
@@ -81,22 +85,22 @@ async function salvarUsuario(e) {
     e.preventDefault();
     
     const formData = new FormData(e.target);
-    const url = modoEdicao ? '/php/editar-usuario.php' : '/php/cadastro.php';
+    const token = localStorage.getItem('token');
+    const url = modoEdicao ? '/cadastro/' + document.getElementById('usuarioId').value : '/cadastro';
+    const method = modoEdicao ? 'PUT' : 'POST';
     
     try {
-        const response = await fetch(url, {
-            method: 'POST',
-            body: formData
-        });
+        const response = await fetch(url, { method, body: formData, headers: { 'Authorization': 'Bearer ' + token } });
         
         const data = await response.json();
         
-        if (data.sucesso) {
-            alert(data.mensagem);
+        if (data.success) {
+            alert(data.message || 'Operação realizada com sucesso.');
             cancelarForm();
             carregarUsuarios();
         } else {
-            alert('Erros: ' + data.erros.join(', '));
+            const msg = data.message || (Array.isArray(data.erros) ? data.erros.join(', ') : 'Falha na operação.');
+            alert('Erros: ' + msg);
         }
     } catch (error) {
         console.error('Erro:', error);
@@ -120,19 +124,21 @@ function excluirUsuario(id, nome) {
             const formData = new FormData();
             formData.append('id', id);
             
-            const response = await fetch('/php/excluir-usuario.php', {
-                method: 'POST',
-                body: formData
+            const token = localStorage.getItem('token');
+        const response = await fetch('/cadastro/' + id, {
+                method: 'DELETE',
+                headers: { 'Authorization': 'Bearer ' + token }
             });
             
             const data = await response.json();
             
-            if (data.sucesso) {
-                alert(data.mensagem);
+            if (data.success) {
+                alert(data.message || 'Usuário excluído com sucesso.');
                 fecharModal();
                 carregarUsuarios();
             } else {
-                alert('Erros: ' + data.erros.join(', '));
+                const msg = data.message || (Array.isArray(data.erros) ? data.erros.join(', ') : 'Falha ao excluir.');
+                alert('Erros: ' + msg);
             }
         } catch (error) {
             console.error('Erro:', error);

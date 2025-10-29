@@ -8,14 +8,14 @@ document.getElementById('formCadastro').addEventListener('submit', function(e) {
     mensagemDiv.innerHTML = '';
     mensagemDiv.className = 'mensagem';
     
-    fetch('/php/cadastro.php', {
+    fetch('/cadastro', {
       method: 'POST',
       body: formData
     })
     .then(response => response.json())
     .then(data => {
-      if (data.sucesso) {
-        mensagemDiv.innerHTML = data.mensagem + '<br><a href="login.html" class="btn-login">Ir para Login</a>';
+      if (data.success) {
+        mensagemDiv.innerHTML = (data.message || 'Cadastro realizado com sucesso!') + '<br><a href="login.html" class="btn-login">Ir para Login</a>';
         mensagemDiv.className = 'mensagem sucesso';
         
        
@@ -23,13 +23,8 @@ document.getElementById('formCadastro').addEventListener('submit', function(e) {
         
         
       } else {
-        let errosHtml = '<ul>';
-        data.erros.forEach(erro => {
-          errosHtml += `<li>${erro}</li>`;
-        });
-        errosHtml += '</ul>';
-        
-        mensagemDiv.innerHTML = errosHtml;
+        const errorText = data.message || (Array.isArray(data.erros) ? data.erros.join(', ') : 'Falha ao cadastrar.');
+        mensagemDiv.innerHTML = errorText;
         mensagemDiv.className = 'mensagem erro';
       }
     })

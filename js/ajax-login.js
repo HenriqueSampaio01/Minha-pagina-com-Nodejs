@@ -37,7 +37,7 @@
 
 // Adicionar evento de submit ao formulário de login
 document.addEventListener('DOMContentLoaded', function() {
-  const formLogin = document.querySelector('form[action="login.php"]');
+  const formLogin = document.querySelector('form');
   if (formLogin) {
     formLogin.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -49,14 +49,17 @@ document.addEventListener('DOMContentLoaded', function() {
       mensagemDiv.innerHTML = '';
       mensagemDiv.className = 'mensagem';
       
-      fetch('/php/login.php', {
+      fetch('/cadastro-autenticar', {
         method: 'POST',
         body: formData
       })
       .then(response => response.json())
       .then(data => {
-        if (data.sucesso) {
-          mensagemDiv.innerHTML = data.mensagem + '<br><a href="' + data.redirect + '" class="btn-redirect">Acessar Área Restrita</a>';
+        if (data.success) {
+          // guarda token e nome para uso futuro
+          if (data.tokenAcesso) localStorage.setItem('token', data.tokenAcesso);
+          if (data.nome) localStorage.setItem('nomeUsuario', data.nome);
+          mensagemDiv.innerHTML = 'Login realizado com sucesso!<br><a href="area-restrita.html" class="btn-redirect">Acessar Área Restrita</a>';
           mensagemDiv.className = 'mensagem sucesso';
           
           // Limpar formulário após sucesso
@@ -64,13 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
           
           // NÃO redirecionar automaticamente - deixar o usuário escolher
         } else {
-          let errosHtml = '<ul>';
-          data.erros.forEach(erro => {
-            errosHtml += `<li>${erro}</li>`;
-          });
-          errosHtml += '</ul>';
-          
-          mensagemDiv.innerHTML = errosHtml;
+          const errorText = data.message || (Array.isArray(data.erros) ? data.erros.join(', ') : 'Falha no login.');
+          mensagemDiv.innerHTML = errorText;
           mensagemDiv.className = 'mensagem erro';
         }
       })

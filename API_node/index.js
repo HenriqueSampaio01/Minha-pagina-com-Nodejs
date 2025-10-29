@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const path = require('path');
 const cors = require('cors');
 const bodyParser= require('body-parser');
 const md5 = require('md5');
@@ -15,8 +16,13 @@ const autenticacao = require('./autenticacaoJwt.js');
 app.use(cors({ origin: '*', methods: ['GET','POST','PUT','DELETE'] }));
 
 
+// Servir arquivos estáticos do site (html, css, js, imgs) a partir da raiz do projeto
+const siteRoot = path.join(__dirname, '..');
+app.use(express.static(siteRoot));
+
+// Rota raiz serve o index.html do site
 app.get('/', function (req, res) {
-    res.send('Olá! Seja bem vindo à nossa API')
+    res.sendFile(path.join(siteRoot, 'html', 'index.html'));
 })
 
 //autenticacao.verificaTokenJwt
@@ -51,13 +57,13 @@ app.get('/cadastro/:id', async function (req, res) {
 
 app.post('/cadastro', upload.none(), async function (req, res) {
     try {
-        const { nome, email, password } = req.body;
+        const { nome, email, password, telefone } = req.body;
         console.log('Body',req.body)
         // Verificação de campos obrigatórios
-        if (!nome || !email || !password) {
+        if (!nome || !email || !password || !telefone) {
             return res.status(400).json({
                 success: false,
-                message: "Nome, email e senha devem ser informados."
+                message: "Nome, email, senha e telefone devem ser informados."
             });
         }
 
@@ -66,11 +72,11 @@ app.post('/cadastro', upload.none(), async function (req, res) {
 
         // Query parametrizada para evitar SQL Injection
         const query = `
-            INSERT INTO cadastro (nome, email, senha)
-            VALUES (?, ?, ?)
+            INSERT INTO cadastro (nome, email, senha, telefone)
+            VALUES (?, ?, ?, ?)
         `;
 
-        const [resultado] = await connection.execute(query, [nome, email, senhaHash]);
+        const [resultado] = await connection.execute(query, [nome, email, senhaHash, telefone]);
 
         if (resultado.affectedRows > 0) {
             return res.status(201).json({
@@ -86,6 +92,12 @@ app.post('/cadastro', upload.none(), async function (req, res) {
 
     } catch (erro) {
         console.error("Erro ao cadastrar usuário:", erro);
+        if (erro && erro.code === 'ER_DUP_ENTRY') {
+            return res.status(409).json({ success: false, message: "E-mail já cadastrado." });
+        }
+        if (erro && erro.code === 'ER_NO_DEFAULT_FOR_FIELD') {
+            return res.status(400).json({ success: false, message: "Campo obrigatório ausente. Verifique os dados enviados." });
+        }
         return res.status(500).json({
             success: false,
             message: "Ocorreu um erro interno na API. Tente novamente mais tarde."
@@ -97,7 +109,7 @@ app.post('/cadastro', upload.none(), async function (req, res) {
 app.put('/cadastro/:id', upload.none() ,async function (req, res) {
     try {
         const { id } = req.params;
-        const { nome, email, password } = req.body;
+        const { nome, email, password, telefone } = req.body;
 
         // Verifica se o ID é válido
         if (!id || isNaN(parseInt(id))) {
@@ -125,6 +137,11 @@ app.put('/cadastro/:id', upload.none() ,async function (req, res) {
             const senhaHash = md5(password);
             campos.push("senha = ?");
             valores.push(senhaHash);
+        }
+
+        if (telefone) {
+            campos.push("telefone = ?");
+            valores.push(telefone);
         }
 
         if (campos.length === 0) {
@@ -244,8 +261,8 @@ app.post('/cadastro-autenticar', upload.none(), async function (req, res) {
     
 })
 
-app.listen(3000, () => {
-	console.log('API On-line!');
+app.listen(8080, () => {
+    console.log('Site + API online em http://localhost:8080');
 });
 
 

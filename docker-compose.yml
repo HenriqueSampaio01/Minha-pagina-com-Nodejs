@@ -1,26 +1,4 @@
-version: '3.8'
-
 services:
-  # Servidor web Apache com PHP
-  web:
-    image: php:8.2-apache
-    container_name: minha-pagina-web
-    ports:
-      - "8080:80"
-    volumes:
-      - ./html:/var/www/html
-      - ./css:/var/www/html/css
-      - ./js:/var/www/html/js
-      - ./imgs:/var/www/html/imgs
-    depends_on:
-      - db
-    environment:
-      - APACHE_DOCUMENT_ROOT=/var/www/html
-    command: >
-      sh -c "a2enmod rewrite &&
-              docker-php-ext-install pdo pdo_mysql &&
-              apache2-foreground"
-
   # Banco de dados MySQL
   db:
     image: mysql:8.0
