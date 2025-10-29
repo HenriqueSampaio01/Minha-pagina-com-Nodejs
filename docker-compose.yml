@@ -12,7 +12,6 @@ services:
       - ./css:/var/www/html/css
       - ./js:/var/www/html/js
       - ./imgs:/var/www/html/imgs
-      - ./php:/var/www/html/php
     depends_on:
       - db
     environment:
